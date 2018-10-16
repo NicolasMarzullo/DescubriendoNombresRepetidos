@@ -1,9 +1,11 @@
 package edu.unlam.nombre;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+
 
 public class Listado {
 	private List <String> nombres;
@@ -23,26 +25,39 @@ public class Listado {
 	}
 
 	
-	public void resolver(){
+	public Salida resolver(){
 		Set<Nombre> nombresRepetidos = new TreeSet<>();
 		String nombreActual, nombreSiguiente;
-		int contRepeteticiones;
+		int contRepeticiones=0;
 		int j=0;
 		
 		Collections.sort(this.nombres);
-		 
+		
+		nombreActual = this.nombres.get(j);
+		nombreSiguiente = this.nombres.get(j);
+		
 		while(j<this.cantDeNombres){
-			contRepeteticiones =1;
-			nombreActual = this.nombres.get(j);
 			
-			nombreSiguiente = this.nombres.get(++j);
+			nombreSiguiente = this.nombres.get(j);
+			if(nombreActual.equals(nombreSiguiente))
+				contRepeticiones++;
+			else{
+				
+				if(contRepeticiones>1)
+					nombresRepetidos.add(new Nombre(nombreActual, contRepeticiones));
+				
+				contRepeticiones=0;
+				
+				nombreActual = nombreSiguiente;
+			}
 			
-			while(++j<this.cantDeNombres && nombreActual.equals(nombreSiguiente = this.nombres.get(j)))
-				contRepeteticiones++;
-			
-			nombresRepetidos.add(new Nombre(nombreActual, contRepeteticiones));
+			j++;
 		}
 		
+		if(contRepeticiones>1)
+			nombresRepetidos.add(new Nombre(nombreActual, contRepeticiones));
+		
+		return new Salida(nombresRepetidos, this.nRepetidos);
 	}
 	
 	

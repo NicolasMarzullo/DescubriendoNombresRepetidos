@@ -12,12 +12,19 @@ public class Nombre implements Comparable<Nombre>{
 
 	@Override
 	public int compareTo(Nombre o) {
-		return this.cantDeVecesRepetido - o.cantDeVecesRepetido;
+		return o.cantDeVecesRepetido-  this.cantDeVecesRepetido;
 	}
 
-	public void setCantDeVecesRepetido(int cantDeVecesRepetido) {
-		this.cantDeVecesRepetido = cantDeVecesRepetido;
+	public String getNombre() {
+		return nombre;
 	}
+
+	@Override
+	public String toString() {
+		return this.nombre + " " + this.cantDeVecesRepetido;
+	}
+	
+	
 	
 	
 	
